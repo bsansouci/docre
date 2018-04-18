@@ -1,32 +1,38 @@
 
 let css = {|
 pre.code > code {
-  color: #555;
+  color: #aaa;
+  font-size: 15px;
+  line-height: 1.26667;
+  font-weight: 400;
+  letter-spacing: -0.027em;
+  font-family: "SF Mono", Menlo, monospace, "SF Pro Icons";
 }
 
 .code-block > .CodeMirror,
 pre.code {
-  border-radius: 3px;
-  box-shadow: 0 0.5px 3px #aaa;
-  background-color: white;
+  /*box-shadow: 0 0.5px 3px #aaa;*/
+  background-color: #f9fafa;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
 }
 .code .ident, .code .pattern-ident {
-    color: #000;
+    color: #333;
 }
 
 .code .module-identifier {
-  color: #707000;
+  color: #aa0;
 }
 
 .code .constructor,
 .code .pattern-constructor {
-  color: #800000;
+  color: #0af;
 }
 
 .code .type-value-identifier,
 .code .type-constructor,
 .code .type-module-identifier {
-  color: #81006f;
+  color: #c100af;
 }
 
 .code .type-vbl,
@@ -38,7 +44,7 @@ pre.code {
 .code .record-module-identifier,
 .code .field-module-identifier
 {
-  color: #808;
+  color: #a0a;
 }
 
 .code .field
@@ -55,23 +61,23 @@ pre.code {
 }
 
 .code .string {
-    color: #30620d;
+    color: #c41a16;
 }
 
 .code .int {
-    color: #36369c;
+    color: #5656cc;
 }
 
 .code .boolean {
-    color: #a74444;
+    color: #ff8f8f;
 }
 
 .code .float {
-    color: #a06000;
+    color: #d49523;
 }
 
 .code .operator {
-  color: #6060a3;
+  color: #9b9bff;
   font-weight: bold;
 }
 

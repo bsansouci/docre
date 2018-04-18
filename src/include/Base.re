@@ -8,12 +8,21 @@ body {
 body {
   font-size: 17px;
   line-height: 26px;
-  font-weight: 400;
-  letter-spacing: -0.021em;
   font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 
-  font-weight: 200;
-  letter-spacing: 0.04em;
+  font-weight: 400;
+
+  font-synthesis: none;
+  -moz-font-feature-settings: 'kern';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  direction: ltr;
+
+  line-height: 1.52947;
+  letter-spacing: -0.021em;
+  background-color: white;
+  font-style: normal;
+  color: #333333;
 }
 
 h4.item {
@@ -101,6 +110,10 @@ div.compile-error {
   border-top-right-radius: 3px;
 }
 
+/*p {
+   width: 600px;
+}
+*/
 .code-post,
 .code-pre,
 .CodeMirror,
@@ -124,9 +137,20 @@ p code {
 .body {
   margin-left: 24px;
   margin-bottom: 48px;
-  line-height: 1.5em;
-  font-size: 20px;
-  letter-spacing: 1px;
+  font-size: 17px;
+
+  font-weight: 400;
+
+  font-synthesis: none;
+  -moz-font-feature-settings: 'kern';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  direction: ltr;
+
+  line-height: 1.52947;
+  letter-spacing: -0.021em;
+  background-color: white;
+  font-style: normal;
 }
 .body-empty,
 .include-body .body {
@@ -149,6 +173,7 @@ h1, h2 {
 }
 h1, h2, h3, h4 {
   color: #444;
+  line-height: 32px;
 }
 
 h4.module {
@@ -199,14 +224,17 @@ a:hover, a:focus {
 .container {
   display: flex;
   justify-content: center;
-  margin: 48px auto;
+  margin: 0px auto;
+  position: relative;
+  top: -48px;
 }
 
 .main {
-  width: 600px;
+   width: 800px;
   padding: 0 16px;
   box-sizing: border-box;
   position: relative;
+  margin-top: 24px;
 }
 
 .edit-link {
@@ -235,6 +263,7 @@ a, a:visited,
   overflow: auto;
   max-height: 100vh;
   word-break: break-word;
+  padding-top: 48px;
 }
 
 .table-of-contents {
@@ -246,13 +275,13 @@ a, a:visited,
   display: flex;
   flex-direction: column;
   padding: 8px;
-  font-size: 14px;
+  font-size: 16px;
   padding-bottom: 32px;
 }
 
 .table-of-contents .toc-header,
 .project-listing .project-title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   margin: 16px 0 8px;
 }
@@ -267,7 +296,7 @@ a, a:visited,
   padding: 8px;
 }
 
-@media(max-width: 1000px) {
+@media(max-width: 1200px) {
   .sidebar {
     position: static;
     width: 600px;
@@ -299,7 +328,7 @@ a, a:visited,
   }
 }
 
-@media(max-width: 620px) {
+@media(max-width: 820px) {
   .sidebar-expander,
   .sidebar {
     width: auto;
@@ -335,7 +364,7 @@ a, a:visited,
 }
 
 .table-of-contents a.header {
-  font-weight: 400;
+  font-weight: 300;
 }
 
 a.level-1 {

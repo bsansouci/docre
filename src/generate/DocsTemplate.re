@@ -8,7 +8,7 @@ let searchStyle = {|
 }
 
 .result .result-highlighted {
-  color: #a33fa3!important;
+  background-color: #fffd54 !important;
 }
 
 .result {
@@ -120,7 +120,7 @@ let codeBlocks = {|
   cursor: pointer;
 }
 
-@media(max-width: 1000px) {
+@media(max-width: 1200px) {
   .block-target-container {
     position: static;
     margin-left: 0;
