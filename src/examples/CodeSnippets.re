@@ -323,18 +323,19 @@ let getSourceDirectories = (base, config) => {
   let rec handleItem = (current, item) => {
     switch item {
     | Json.Array(contents) => List.map(handleItem(current), contents) |> List.concat
-    | Json.String(text) => [current /+ text]
+    | Json.String(text) => [(current /+ text, None)]
     | Json.Object(_) =>
       let dir = Json.get("dir", item) |?> Json.string |? "Must specify directory";
       let backend = item |> Json.get("backend") |?> Json.array |?>> optMap(Json.string) |? ["js"];
       /* print_endline("Backend? " ++ String.concat(" & ", backend)); */
       let typ = item |> Json.get("type") |?> Json.string |? "lib";
+      let maybePublic = item |> Json.get("public") |?> Json.array |?>> optMap(Json.string);
       if (typ == "dev" || !List.mem("js", backend)) {
         []
       } else {
-        [current /+ dir, ...switch (item |> Json.get("subdirs")) {
+        [(current /+ dir, maybePublic), ...switch (item |> Json.get("subdirs")) {
         | None => []
-        | Some(Json.True) => Files.collectDirs(base /+ current /+ dir) |> List.map(Files.relpath(base))
+        | Some(Json.True) => Files.collectDirs(base /+ current /+ dir) |> List.map((d) => (Files.relpath(base, d), None))
         | Some(item) => handleItem(current /+ dir, item)
         }]
       }
@@ -357,7 +358,7 @@ let getDependencyDirs = (base, config) => {
       let isNative = isNative(inner);
       /* TODO get directories from config */
       if (List.mem("js", allowedKinds)) {
-        getSourceDirectories(loc, inner) |> List.map(name => (
+        getSourceDirectories(loc, inner) |> List.map(((name, _)) => (
           loc /+ (isNative ? "lib/bs/js" : "lib/ocaml") /+ name,
           loc /+ "lib/js" /+ name,
         ));
@@ -379,7 +380,7 @@ let compileSnippets = (~bsRoot, base, dest, blocks) => {
   let config = Json.parse(Files.readFile(base /+ "bsconfig.json") |! "No bsconfig.json found");
   let isNative = isNative(config);
 
-  let mine = getSourceDirectories(base, config) |> List.map(name => (
+  let mine = getSourceDirectories(base, config) |> List.map(((name, _)) => (
     base /+ (isNative ? "lib/bs/js" : "lib/ocaml") /+ name,
     base /+ "lib/js" /+ name
   )) |> List.filter(((compiled, sourced)) => Files.exists(compiled));

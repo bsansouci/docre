@@ -408,7 +408,23 @@ let generateProject = (~selfPath, ~projectName, ~root, ~target, ~sourceDirectori
     let sourceDirectories = CodeSnippets.getSourceDirectories(root, bsConfig);
     let isNative = CodeSnippets.isNative(bsConfig);
     let compiledRoot = root /+ (isNative ? "lib/bs/js" : "lib/bs");
-    let found = sourceDirectories |> List.map(name => compiledRoot /+ name) |> List.map(p => Files.collect(p, isCmt)) |> List.concat;
+    let found = sourceDirectories
+      |> List.map(((name, allowedModules)) => (compiledRoot /+ name, allowedModules))
+      |> List.map(((name, allowedModules)) => {
+          let files = Files.collect(name, isCmt);
+      switch allowedModules {
+        | None => files
+        | Some(allowedModules) =>
+          List.filter(i => {
+            let ii = String.capitalize(Filename.basename(Filename.chop_extension(i)));
+            let ret = List.mem(ii, allowedModules);
+            if (!ret) {
+              print_endline("Skipping module '" ++ ii ++ "' because not public. ");
+            };
+            ret
+          }, files)
+      }
+    }) |> List.concat;
     (found, compiledRoot)
     /* HACKKKK */
   } : (sourceDirectories |> List.map(p => Files.collect(p, isCmt)) |> List.concat, List.hd(sourceDirectories));
