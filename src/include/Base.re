@@ -261,9 +261,10 @@ a, a:visited,
   position: -webkit-sticky;
   top: 0;
   overflow: auto;
-  max-height: 100vh;
+  max-height: 90vh;
   word-break: break-word;
   padding-top: 48px;
+  padding-bottom: 48px;
 }
 
 .table-of-contents {

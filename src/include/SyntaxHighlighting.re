@@ -94,7 +94,7 @@ pre.code {
   pointer-events: none;
   margin-top: 10px;
   margin-left: 10px;
-  box-shadow: 0 1px 6px #555;
+  box-shadow: 0px 1px 3px #e6e6e6;
   border-radius: 3px;
 }
 
